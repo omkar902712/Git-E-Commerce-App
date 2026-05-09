@@ -6,11 +6,13 @@ import { Routes, Route } from 'react-router-dom'
 import Home from './Pages/Home/Home';
 import Category from './Pages/Category/Category';
 import Header from './Components/Header/Header';
+import CategoriesNavbar from './Components/CategoriesNavbar/CategoriesNavbar';
 
 const App = () => {
   return (
     <>
       <Header/>
+      <CategoriesNavbar/>
 
       <Routes>
         <Route path="/" element={<Home />} />
