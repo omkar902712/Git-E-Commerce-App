@@ -1,17 +1,59 @@
-.navbar{
+/* Navbar */
+.navbar {
   display: flex;
-  background-color: gray;
-  gap:20px;
-  padding:15px;
+  gap: 30px;
+  list-style: none;
+
+  background-color: grey;
+  color: white;
+
+  height:50px; 
+  margin:10px 0px 0px 0px;  
+  padding:0 20px;  
+
+  align-items: center;
 }
 
-.navbar a{
-  color:white;
-  text-decoration: none;
-  font-size: 18px;  
+/* Main Menu */
+.menu-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  height: 100%; 
+  padding:0 10px;
+
+  cursor: pointer;  
 }
 
-.navbar a:hover{
+/* Dropdown */
+.dropdown {
+  position: absolute;
+  top: 400%;  
+  right:30%;
+
+  min-width: 220px;
+
+  background-color: grey;  
+  border: 1px solid #999;
+
+  display: none;
+
+  z-index: 999;  
+}
+
+/* Show Dropdown */
+.menu-item:hover .dropdown{
+  display: block;
+}
+
+/* Dropdown Items */
+.dropdown p{ 
+  padding: 12px 15px;
+  margin:0;
+}
+
+.dropdown p:hover{
+  background-color: lightgray;  
   color:black;
 }
-
