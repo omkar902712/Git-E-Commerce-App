@@ -1,89 +1,47 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import './CategoriesNavbar.css';
+import "./CategoriesNavbar.css";
 
 const CategoriesNavbar = () => {
-
   const [products, setProducts] = useState([]);
-  const [category, setCategory] = useState('');
+  const [category, setCategory] = useState("");
 
   const menuData = {
-    Cosmetics: [
-      "beauty",
-      "fragrances",
-      "skin-care"
-    ],
-
-    HouseProducts: [
-      "furniture",
-      "groceries",
-      "home-decoration",
-      "kitchen-accessories"
-    ],
-
-    Mens: [
-      "mens-shirts",
-      "mens-shoes",
-      "mens-watches"
-    ],
-
-    Women: [
-      "tops",
-      "womens-dresses",
-      "womens-bags",
-      "womens-shoes",
-      "womens-watches",
-      "womens-jewellery" // corrected
-    ],
-
-    Electronics: [
-      "smartphones",
-      "mobile-accessories",
-      "laptops",
-      "tablets"
-    ],
-
-    SportsVehicle: [
-      "sports-accessories",
-      "sunglasses",
-      "motorcycle",
-      "vehicle"
-    ]
+    Cosmetics: ["beauty", "fragrances", "skin-care"],
+    HouseProducts: ["furniture", "groceries", "home-decoration", "kitchen-accessories"],
+    Mens: ["mens-shirts", "mens-shoes", "mens-watches"],
+    Women: ["tops", "womens-dresses", "womens-bags", "womens-shoes", "womens-watches", "womens-jewellery"],
+    Electronics: ["smartphones", "mobile-accessories", "laptops", "tablets"],
+    SportsVehicle: ["sports-accessories", "sunglasses", "motorcycle", "vehicle"]
   };
 
-  //https://dummyjson.com/products/categories
-
-  // fetch products when category changes 
   useEffect(() => {
     async function getProducts() {
-
-      // Nothing, if category is empty
       if (!category) return;
-
-      const resp = await fetch(
-        `https://dummyjson.com/products/categories/${category}`
-      );
-
-      const data = await resp.json();
-      setProducts(data.products);
+      try {
+        const resp = await fetch(`https://dummyjson.com/products/category/${category}`);
+        const data = await resp.json();
+        setProducts(data.products);
+      } catch (error) {
+        console.error("Fetch error:", error);
+      }
     }
-
     getProducts();
-
   }, [category]);
 
   return (
-    <div>
+    <nav className="nav-container">
       <ul className="navbar">
         {Object.entries(menuData).map(([mainMenu, subMenu]) => (
           <li key={mainMenu} className="menu-item">
-           <span> {mainMenu} </span>
-
-            {/* Drop Down */}
+            <span className="menu-title">{mainMenu}</span>
             <div className="dropdown">
               {subMenu.map((item) => (
-                <p key={item} onMouseOver={()=>setCategory(item)}>
-                  {item}
+                <p 
+                  key={item} 
+                  className="dropdown-link"
+                  onClick={() => setCategory(item)}
+                >
+                  {item.replace(/-/g, ' ')}
                 </p>
               ))}
             </div>
@@ -91,11 +49,17 @@ const CategoriesNavbar = () => {
         ))}
       </ul>
 
-      {/* Product Review */}
-      <div>
-
+      {/* Products Display */}
+      <div className="products-container">
+        {products.map((item) => (
+          <div key={item.id} className="product-card">
+            <img src={item.thumbnail} alt={item.title} />
+            <h3>{item.title}</h3>
+            <p>${item.price}</p>
+          </div>
+        ))}
       </div>
-    </div>
+    </nav>
   );
 };
 
