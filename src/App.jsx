@@ -11,9 +11,9 @@ import CategoriesNavbar from './Components/CategoriesNavbar/CategoriesNavbar';
 const App = () => {
   return (
     <>
-      <Header />
-      
+      <Header />      
       <CategoriesNavbar />
+      
 
       <Routes>
         <Route path="/" element={<Home />} />
