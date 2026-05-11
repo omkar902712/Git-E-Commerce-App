@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import './Header.css';
 import { Link } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ setSearch }) => {
 
   const appLogo = {
     title: "App Logo Meesho",
@@ -25,14 +25,15 @@ const Header = () => {
         <div className="col-sm-1"> </div>
 
         <div className="col-sm-5 mt-3">
-          <input id="msg" type="text" className="form-control" name="msg" placeholder="Search Products" />
+          <input type="text" className="form-control" placeholder="Search Products"
+            onChange={(e) => setSearch(e.target.value)} />
         </div>
 
         <div className="col-sm-1"> </div>
 
         <div className="col-sm-1 ps-3 mt-3">
           <Link className="profile_style"
-            onClick={()=>setVisible(!visible)}> Profile </Link>
+            onClick={() => setVisible(!visible)}> Profile </Link>
         </div>
 
         <div className="col-sm-1 ps-5 mt-3">

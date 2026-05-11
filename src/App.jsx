@@ -10,17 +10,11 @@ import CategoriesNavbar from './Components/CategoriesNavbar/CategoriesNavbar';
 
 const App = () => {
   return (
-    <>
-      <Header />      
-      <CategoriesNavbar />      
-
+    <>      
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/category" element={<Category />} />
-
-      </Routes>
-
-      <Footer />
+      </Routes>      
     </>
   )
 }

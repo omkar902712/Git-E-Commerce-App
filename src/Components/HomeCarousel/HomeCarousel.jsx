@@ -9,7 +9,7 @@ import slider4 from "../../assets/Images/Header/Slider4.jpg";
 import slider5 from "../../assets/Images/Header/Slider5.jpg";
 import slider6 from "../../assets/Images/Header/Slider6.jpg";
 
-const HomeCarousel = () => {
+const HomeCarousel = () => { 
 
   const images = [slider1, slider2, slider3, slider4, slider5, slider6];
 
