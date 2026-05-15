@@ -33,8 +33,7 @@ const ProductDetails = () => {
       <CategoriesNavbar />
 
       <div className="product-card">
-
-        <div className="row align-items-start">
+        <div className="row">
 
           {/* LEFT IMAGE */}
           <div className="col-lg-6 col-md-6 col-12">
@@ -61,9 +60,13 @@ const ProductDetails = () => {
               {product.title}
             </h2>
 
+            <hr/>
+
             <p className="description">
               {product.description}
-            </p>            
+            </p>      
+
+            <hr/>      
 
             <div className="price-box">
               <span className="current-price">
@@ -76,16 +79,18 @@ const ProductDetails = () => {
 
               <span className="discount">
                 {Math.floor(product.discountPercentage)}% OFF
-              </span>
+              </span>               
 
               <span>
                 {product.returnPolicy}
               </span>
             </div>
 
+            <hr/>
+
             <div className="rating-box">
-             <span> {product.rating} </span>
-            </div>           
+             <span> Rating : {product.rating} </span>
+            </div>                      
 
           </div>
 
