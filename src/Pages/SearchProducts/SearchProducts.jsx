@@ -18,7 +18,7 @@ const SearchProducts = ({ search }) => {
 
   return (
     <div className="container-fluid py-4">
-      <div className="row">
+      <div className="row mt-5">
         {/* TERNARY OPERATOR: Check if there are products to display */}
         {products.length > 0 ? (
           products.map((item) => (

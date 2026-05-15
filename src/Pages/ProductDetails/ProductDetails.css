@@ -42,7 +42,7 @@
 .imgDetails:hover {
   transform: scale(2.05);
 }
-
+ 
 @media(max-width:768px) {
   .imgDetails {
     /* Slightly smaller aspect ratio for mobile if needed, or keep 1/1 */

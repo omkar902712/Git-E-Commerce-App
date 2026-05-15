@@ -17,7 +17,7 @@ const AllProducts = () => {
       <div className="row">
         {products.map((item, index) => (
           <div key={item.id} className="col-lg-3 col-md-4 col-sm-6 mb-4">
-            <div className="product-card">
+            <div className="product-card mt-5">
               <Link to={`/product/${item.id}`} className="product-link">
 
                 <span className="badge bg-secondary mb-2">
