@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import './AllProducts.css';
 // FIX 1: Import Link from react-router-dom, NOT bootstrap-icons
-import { Link } from "react-router-dom"; 
+import { Link } from "react-router-dom";
 
 const AllProducts = () => {
   const [products, setProducts] = useState([]);
@@ -19,7 +19,7 @@ const AllProducts = () => {
           <div key={item.id} className="col-lg-3 col-md-4 col-sm-6 mb-4">
             <div className="product-card">
               <Link to={`/product/${item.id}`} className="product-link">
-                
+
                 <span className="badge bg-secondary mb-2">
                   Item #{index + 1}
                 </span>
@@ -32,7 +32,9 @@ const AllProducts = () => {
                 <div className="product-info">
                   <h5 className="product-title">{item.title}</h5>
                   <p className="product-price">${item.price}</p>
-                  <button className="btn btn-primary btn-sm w-100">View Details</button>
+                  <button className="btn btn-primary btn-sm w-100">
+                    View Details
+                  </button>
                 </div>
 
               </Link>
