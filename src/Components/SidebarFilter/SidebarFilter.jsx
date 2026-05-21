@@ -1,77 +1,117 @@
 import React, { useEffect, useState } from 'react';
+import './SidebarFilter.css';
 
-const SidebarFilter = () => {
+const SidebarFilter = ({ onFilterActiveChange }) => {
+
   const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedCategories, setSelectedCategories] = useState([]);
   const [products, setProducts] = useState([]);
 
-  // Fetch Categories on mount
+  // Fetch Categories
   useEffect(() => {
     fetch('https://dummyjson.com/products/categories')
       .then(res => res.json())
       .then((data) => {
-        // DummyJSON returns an array of category objects directly
         setCategories(data);
       });
   }, []);
 
-  // Fetch Products when selectedCategory changes
+  // Fetch Products
   useEffect(() => {
-    if (selectedCategory !== '') {
-      fetch(`https://dummyjson.com/products/category/${selectedCategory}`)
-        .then(res => res.json())
-        .then((data) => {
-          // Update products state, NOT categories
-          setProducts(data.products);
-        });
+    if (selectedCategories.length === 0) {
+      setProducts([]);
+      return;
     }
-  }, [selectedCategory]);
 
+    const fetchPromises = selectedCategories.map((category) =>
+      fetch(`https://dummyjson.com/products/category/${category}`)
+        .then(res => res.json())
+        .then(data => data.products)
+    );
+
+    Promise.all(fetchPromises)
+      .then((allProductsArrays) => {
+        const combinedProducts = allProductsArrays.flat();
+        setProducts(combinedProducts);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+  }, [selectedCategories]);
+
+  useEffect(() => {
+    onFilterActiveChange?.(selectedCategories.length > 0);
+  }, [selectedCategories, onFilterActiveChange]);
+
+  // Checkbox Change
   const handleCategoryChange = (slug) => {
-    // If clicking the same category, deselect it; otherwise, select new
-    setSelectedCategory(prev => prev === slug ? '' : slug);
+    setSelectedCategories((prevSelected) => {
+      if (prevSelected.includes(slug)) {
+        return prevSelected.filter(item => item !== slug);
+      } else {
+        return [...prevSelected, slug];
+      }
+    });
+
   };
 
   return (
-    <div style={{ display: 'flex', gap: '20px', padding: '20px' }}>
-      {/* Sidebar Section */}
-      <div style={{ minWidth: '200px' }}>
-        <h5>Sidebar Filter</h5>
-        {categories && categories.length > 0 ? (
-          categories.map((item) => (
-            <div key={item.slug}>
-              <input
-                type="checkbox"
-                id={item.slug}
-                checked={selectedCategory === item.slug}
-                onChange={() => handleCategoryChange(item.slug)}
-              />
-              <label htmlFor={item.slug}> {item.name} </label>
-            </div>
-          ))
-        ) : (
-          <p>Loading categories...</p>
-        )}
-      </div>
+    <div className='container-fluid'>
 
-      {/* Products Section */}
-      <div>
-        <h2>Products</h2>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px' }}>
-          {products.length > 0 ? (
-            products.map((product) => (
-              <div key={product.id} style={{ border: '1px solid #ccc', padding: '10px' }}>
-                <h3>{product.title}</h3>
-                <img src={product.thumbnail} alt={product.title} width="150" />
-                <p>${product.price}</p>
-              </div>
-            ))
-          ) : (
-            <p>Select a category to see products.</p>
-          )}
+      <div className="row">
+        {/* Sidebar */}
+        <div className='col-sm-3'>
+          <div className='sidebar'>
+
+            <h2>Sidebar Filter</h2>
+
+            {categories.length > 0 ? (
+              categories.map((category) => (
+                <div className='category-item' key={category.slug}>
+                  <input type="checkbox" id={category.slug}
+                    checked={selectedCategories.includes(category.slug)}
+                    onChange={() => handleCategoryChange(category.slug)} />
+
+                  <label htmlFor={category.slug}>
+                    {category.name}
+                  </label>
+                </div>
+              ))
+            ) : (
+              <p>Loading...</p>
+            )
+            }
+          </div>
         </div>
+
+        {/* Products */}
+        <div className='col-sm-9'>
+          <div className='products-section'>
+            <h2>Products</h2>
+            <div className='products-grid'>
+              {products.length > 0 ? (
+                products.map((product) => (
+                  <div className='product-card' key={product.id}>
+                    <img src={product.thumbnail}
+                      alt={product.title} />
+
+                    <h3>{product.title}</h3>
+
+                    <p>${product.price}</p>
+                  </div>
+                ))
+
+              ) : (
+                <p>Select Category</p>
+              )
+              }
+            </div>
+          </div>
+        </div>
+
       </div>
-    </div>
+    </div >
   );
 };
 

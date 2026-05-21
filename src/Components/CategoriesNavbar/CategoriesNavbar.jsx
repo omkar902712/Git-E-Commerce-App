@@ -1,66 +1,34 @@
-import React, { useEffect, useState } from "react";
-import "./CategoriesNavbar.css";
+// CategoriesNavbar.jsx
 
-const CategoriesNavbar = () => {
-  const [products, setProducts] = useState([]);
-  const [category, setCategory] = useState("");
+import React, { useEffect, useState } from 'react';
+import './CategoriesNavbar.css';
 
-  const menuData = {
-    Cosmetics: ["beauty", "fragrances", "skin-care"],
-    HouseProducts: ["furniture", "groceries", "home-decoration", "kitchen-accessories"],
-    Mens: ["mens-shirts", "mens-shoes", "mens-watches"],
-    Women: ["tops", "womens-dresses", "womens-bags", "womens-shoes", "womens-watches", "womens-jewellery"],
-    Electronics: ["smartphones", "mobile-accessories", "laptops", "tablets"],
-    SportsVehicle: ["sports-accessories", "sunglasses", "motorcycle", "vehicle"]
-  };
+const CategoriesNavbar = ({ selectedCategory, onCategorySelect }) => {
+
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    async function getProducts() {
-      if (!category) return;
-      try {
-        const resp = await fetch(`https://dummyjson.com/products/category/${category}`);
-        const data = await resp.json();
-        setProducts(data.products);
-      } catch (error) {
-        console.error("Fetch error:", error);
-      }
-    }
-    getProducts();
-  }, [category]);
+    fetch('https://dummyjson.com/products/categories')
+      .then(res => res.json())
+      .then(data => {
+        setCategories(data);
+      });
+  }, []);
 
   return (
-    <nav className="nav-container">
-      <ul className="navbar">
-        {Object.entries(menuData).map(([mainMenu, subMenu]) => (
-          <li key={mainMenu} className="menu-item">
-            <span className="menu-title">{mainMenu}</span>
-            <div className="dropdown">
-              {subMenu.map((item) => (
-                <p 
-                  key={item} 
-                  className="dropdown-link"
-                  onClick={() => setCategory(item)}
-                >
-                  {item.replace(/-/g, ' ')}
-                </p>
-              ))}
-            </div>
-          </li>
-        ))}
-      </ul>
-
-      {/* Products Display */}
-      <div className="products-container">
-        {products.map((item) => (
-          <div key={item.id} className="product-card">
-            <img src={item.thumbnail} alt={item.title} />
-            <h3>{item.title}</h3>
-            <p>${item.price}</p>
-          </div>
-        ))}
-      </div>
-    </nav>
+    <div className="categories-navbar">
+      {categories.map((item) => (
+        <button
+          key={item.slug}
+          className={`category-btn ${item.slug === selectedCategory ? 'active' : ''}`}
+          onClick={() => onCategorySelect?.(item.slug)}
+        >
+          {item.name}
+        </button>
+      ))}
+    </div>
   );
+
 };
 
 export default CategoriesNavbar;

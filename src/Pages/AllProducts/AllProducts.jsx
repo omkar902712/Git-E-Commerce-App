@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import './AllProducts.css';
-// FIX 1: Import Link from react-router-dom, NOT bootstrap-icons
 import { Link } from "react-router-dom";
 
 const AllProducts = () => {
@@ -10,34 +9,45 @@ const AllProducts = () => {
     fetch('https://dummyjson.com/products')
       .then(resp => resp.json())
       .then(data => setProducts(data.products));
-  }, []); // FIX 2: Added empty array [] to prevent infinite loops
+  }, []);
 
   return (
     <div className="container-fluid py-4">
-      <div className="row">
+      <div className="row g-4">
         {products.map((item, index) => (
-          <div key={item.id} className="col-lg-3 col-md-4 col-sm-6 mb-4">
-            <div className="product-card mt-5">
-              <Link to={`/product/${item.id}`} className="product-link">
+          <div key={item.id} className="col-12 col-md-6 col-lg-4 d-flex">
+            {/* Added d-flex flex-column to make sure internal elements stretch properly */}
+            <div className="product-card w-100 d-flex flex-column p-3 border rounded shadow-sm">
 
-                <span className="badge bg-secondary mb-2">
+              {/* Link only wraps the clickable content area */}
+              <Link to={`/product/${item.id}`} className="product-link text-decoration-none text-dark d-flex flex-column flex-grow-1">
+
+                <span className="badge bg-secondary align-self-start">
                   Item #{index + 1}
                 </span>
 
-                <div className="img-container">
-                  {/* FIX 3: Corrected spelling to 'thumbnail' */}
-                  <img src={item.thumbnail} className="products-img" alt={item.title} />
+                <div className="img-container text-center">
+                  <img src={item.thumbnail} alt={item.title}
+                    className="img-fluid products-img" />
                 </div>
 
                 <div className="product-info">
                   <h5 className="product-title">{item.title}</h5>
-                  <p className="product-price">${item.price}</p>
+                  <h3 className="product-price text-primary">
+                    ${item.price}
+                  </h3>
+                </div>
+
+                <div className="viewDetails">
                   <button className="btn btn-primary btn-sm w-100">
                     View Details
                   </button>
                 </div>
-
               </Link>
+
+              {/* Button sits safely outside the Link but inside the Flex card */}
+              
+
             </div>
           </div>
         ))}

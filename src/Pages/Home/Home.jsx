@@ -11,40 +11,48 @@ import AllProducts from '../AllProducts/AllProducts'
 import CategoriesNavbar from '../../Components/CategoriesNavbar/CategoriesNavbar';
 
 import SidebarFilter from '../../Components/SidebarFilter/SidebarFilter';
+import ProductsDisplay from '../ProductDisplay/ProductDisplay';
 
 const Home = () => {
 
   const [search, setSearch] = useState('');
-  const [categories, setCategories] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [sidebarFilterActive, setSidebarFilterActive] = useState(false);
 
   return (
     <div className='container-fluid'>
       <div className='row'>
         <Header setSearch={setSearch} />
 
-        <CategoriesNavbar />
+        <CategoriesNavbar
+          selectedCategory={selectedCategory}
+          onCategorySelect={setSelectedCategory}
+        />
 
         <HomeCarousel />
-      </div>           
-
-      <div className='row'>
-        <div className='col-sm-2 mt-5'>
-          
-          <SidebarFilter />
-        </div>
-
-        <div className='col-sm-10'>
-          {search.length === 0 ?
-        <AllProducts /> : <SearchProducts search={search} />}
-        </div>
-
       </div>
 
-      
+      <br /> <br />
+
+      <div className='row'>
+        <div className='col-sm-2'>
+          <SidebarFilter onFilterActiveChange={setSidebarFilterActive} />
+        </div>
+
+        <div className='col-sm-10 mt-5'>
+          {!sidebarFilterActive && (
+            selectedCategory ? (
+              <ProductsDisplay selectedCategory={selectedCategory} />
+            ) : search.length > 0 ? (
+              <SearchProducts search={search} />
+            ) : (
+              <AllProducts />
+            )
+          )}
+        </div>
+      </div>
 
       <hr />
-
-      
 
       <Footer />
     </div>

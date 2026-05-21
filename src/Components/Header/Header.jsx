@@ -1,24 +1,17 @@
 import React, { useState } from "react";
 import './Header.css';
 import { Link } from "react-router-dom";
+import Logo_Img from '../../assets/Images/Header/Logo.jpg';
 
 const Header = ({ setSearch }) => {
-
-  const appLogo = {
-    title: "App Logo Meesho",
-    thumnail: "https://www.meesho.com/assets/svgicons/meeshoLogo.svg"
-  };
-
   const [visible, setVisible] = useState(false);
 
   return (
     <div className="container-fluid">
-
       <div className="row">
-
         <div className="col-sm-2 ps-5">
           <Link to="/">
-            <img src={appLogo.thumnail} alt={appLogo.title} className="appLogo" />
+            <img src={Logo_Img} alt="E Comm Logo" className="appLogo" />
           </Link>
         </div>
 
@@ -39,6 +32,7 @@ const Header = ({ setSearch }) => {
         <div className="col-sm-1 ps-5 mt-3">
           <Link className="cart_style"> Cart </Link>
         </div>
+
       </div>
 
       {visible && (
@@ -48,8 +42,7 @@ const Header = ({ setSearch }) => {
           <Link> Delete Account </Link> <hr />
           <Link> Logout </Link>
         </div>
-      )}
-
+      )}     
     </div>
   );
 };
