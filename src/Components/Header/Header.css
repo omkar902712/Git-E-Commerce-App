@@ -1,79 +1,158 @@
-.appLogo {
-  width: 100%;
-  height: 60px;
-  margin-top: 10px;
-}
-
-.profile_style{
-  height: auto;  
-  width:auto;
-  font-size: 24px;
-  text-decoration:none;
-}
-
-.profile_style:hover{
-  color:green;   
-  text-decoration:none;
-}
-
-.cart_style{
-  height: auto;  
-  width:auto;
-  font-size: 24px;
-  text-decoration:none;
-}
-
-.cart_style:hover{
-  color:green;    
-  text-decoration:none;
-}
-
-.profile_dropdown {
-  position: absolute; /* Key change: removes from flow */
-  right: 105px;       /* Aligns it to the right of the screen */
-  top: 60px;         /* Adjust based on your header height */
-  width: 20%;
-  height: auto;      /* Changed from 260px to auto for better fit */
-  background-color: white;  
-  padding: 20px;     /* Simplified padding */
-  border-radius: 10px;  
-  z-index: 1;     /* High z-index to stay on top */
-  display: flex;     /* Added flex for better link layout */
-  flex-direction: column;
-
-  /* Box Shadow Property */
-  /* offset-x | offset-y | blur-radius | spread-radius | color */
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
-  
-  /* Optional: Add a subtle border to define the edges on dark themes */
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.profile_dropdown a {
-  font-size: 18px;
-  padding: 10px 0;
-  text-decoration: none;
-  font-weight: bold;
-}
+/* =========================
+   Header Main Container
+========================= */
 
 .container-fluid {
-  position: relative; /* Establishes a positioning context for absolute children */
-  z-index: 1000;      /* Ensures the entire header sits above the body content */
-  background-color: white; /* Optional: prevents underlying content from bleeding through */
+  position: relative;
+  background-color: #ffffff;
+  padding: 10px 20px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.08);
+  z-index: 1000;
 }
 
+/* =========================
+   Logo
+========================= */
+
+.appLogo {
+  width: 100%;
+  max-width: 160px;
+  height: 60px;
+  object-fit: contain;
+}
+
+/* =========================
+   Search Input
+========================= */
+
+.form-control {
+  height: 45px;
+  border-radius: 8px;
+  border: 1px solid #dcdcdc;  
+  padding-left: 15px;
+  transition: 0.3s ease;
+  box-shadow: none;
+  border-color: #198754;
+  font-size: 25px;
+}
+
+.form-control:focus {
+  box-shadow: none;
+  border-color: #198754;
+  font-size: 25px;
+}
+
+/* =========================
+   Profile & Cart Links
+========================= */
+
+.profile_style,
+.cart_style {
+  font-size: 22px;
+  font-weight: 600;
+  color: #212529;
+  text-decoration: none;
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+
+.profile_style:hover,
+.cart_style:hover {
+  color: #198754;
+}
+
+/* =========================
+   Profile Dropdown
+========================= */
+
 .profile_dropdown {
-  position: absolute; 
-  right: 105px;       
-  top: 60px;         
-  width: 20%;
-  height: auto;      
-  background-color: white;  
-  padding: 20px;     
-  border-radius: 10px;  
-  z-index: 1001;     /* Must be equal to or higher than the parent header context */
-  display: flex;     
+  position: absolute;
+  top: 85px;
+  right: 80px;
+
+  width: 240px;
+  background-color: #ffffff;
+
+  border-radius: 12px;
+  padding: 15px;
+
+  display: flex;
   flex-direction: column;
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(0, 0, 0, 0.1); /* Changed to dark transparency since bg is white */
+  gap: 10px;
+
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.15);
+
+  border: 1px solid #e9ecef;
+
+  z-index: 2000;
+
+  animation: dropdownFade 0.3s ease;
+}
+
+/* Dropdown Links */
+
+.profile_dropdown a {
+  text-decoration: none;
+  color: #212529;
+  font-size: 17px;
+  font-weight: 500;
+
+  padding: 10px 12px;
+  border-radius: 8px;
+
+  transition: 0.3s ease;
+}
+
+.profile_dropdown a:hover {
+  background-color: #f8f9fa;
+  color: #198754;
+}
+
+/* HR */
+
+.profile_dropdown hr {
+  margin: 0;
+  border-color: #eeeeee;
+}
+
+/* =========================
+   Animation
+========================= */
+
+@keyframes dropdownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================
+   Responsive
+========================= */
+
+@media (max-width: 768px) {
+  .appLogo {
+    max-width: 120px;
+    height: 50px;
+  }
+
+  .profile_style,
+  .cart_style {
+    font-size: 18px;
+  }
+
+  .profile_dropdown {
+    width: 200px;
+    right: 20px;
+    top: 75px;
+  }
+
+  .form-control {
+    margin-top: 10px;
+  }
 }

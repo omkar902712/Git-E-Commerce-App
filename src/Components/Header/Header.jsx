@@ -17,8 +17,8 @@ const Header = ({ setSearch }) => {
 
         <div className="col-sm-1"> </div>
 
-        <div className="col-sm-5 mt-3">
-          <input type="text" className="form-control" placeholder="Search Products"
+        <div className="col-sm-5 mt-3">          
+          <input type="text" className="form-control search" placeholder="Search Products"
             onChange={(e) => setSearch(e.target.value)} />
         </div>
 

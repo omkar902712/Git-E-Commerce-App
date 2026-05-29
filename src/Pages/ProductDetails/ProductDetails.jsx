@@ -31,7 +31,7 @@ const ProductDetails = () => {
   return (
     <div className="container-fluid p-0">
       <Header />
-      <CategoriesNavbar />
+      <hr/>      
 
       {/* Main Container */}
       <div className="container my-5">

@@ -1,117 +1,164 @@
 import React, { useEffect, useState } from 'react';
+
 import './SidebarFilter.css';
 
-const SidebarFilter = ({ onFilterActiveChange }) => {
+const SidebarFilter = ({
+  setSidebarProducts,
+  onFilterActiveChange
+}) => {
 
   const [categories, setCategories] = useState([]);
+
   const [selectedCategories, setSelectedCategories] = useState([]);
-  const [products, setProducts] = useState([]);
 
   // Fetch Categories
   useEffect(() => {
+
     fetch('https://dummyjson.com/products/categories')
-      .then(res => res.json())
+
+      .then((res) => res.json())
+
       .then((data) => {
+
         setCategories(data);
+
+      })
+
+      .catch((err) => {
+
+        console.log(err);
+
       });
+
   }, []);
 
-  // Fetch Products
+  // Fetch Filter Products
   useEffect(() => {
+
+    // If no category selected
     if (selectedCategories.length === 0) {
-      setProducts([]);
+
+      setSidebarProducts([]);
+
+      onFilterActiveChange(false);
+
       return;
+
     }
 
-    const fetchPromises = selectedCategories.map((category) =>
-      fetch(`https://dummyjson.com/products/category/${category}`)
-        .then(res => res.json())
-        .then(data => data.products)
+    onFilterActiveChange(true);
+
+    const fetchProducts = selectedCategories.map((category) =>
+
+      fetch(`https://dummyjson.com/products/category/${category.slug}`)
+
+        .then((res) => res.json())
+
+        .then((data) => data.products)
+
     );
 
-    Promise.all(fetchPromises)
-      .then((allProductsArrays) => {
-        const combinedProducts = allProductsArrays.flat();
-        setProducts(combinedProducts);
+    Promise.all(fetchProducts)
+
+      .then((allProducts) => {
+
+        const combinedProducts = allProducts.flat();
+
+        setSidebarProducts(combinedProducts);
+
       })
+
       .catch((err) => {
+
         console.log(err);
+
       });
 
-  }, [selectedCategories]);
+  }, [
+    selectedCategories,
+    setSidebarProducts,
+    onFilterActiveChange
+  ]);
 
-  useEffect(() => {
-    onFilterActiveChange?.(selectedCategories.length > 0);
-  }, [selectedCategories, onFilterActiveChange]);
+  // Checkbox Handle
+  const handleCategoryChange = (category) => {
 
-  // Checkbox Change
-  const handleCategoryChange = (slug) => {
     setSelectedCategories((prevSelected) => {
-      if (prevSelected.includes(slug)) {
-        return prevSelected.filter(item => item !== slug);
+
+      const alreadySelected = prevSelected.find(
+        (item) => item.slug === category.slug
+      );
+
+      if (alreadySelected) {
+
+        return prevSelected.filter(
+          (item) => item.slug !== category.slug
+        );
+
       } else {
-        return [...prevSelected, slug];
+
+        return [...prevSelected, category];
+
       }
+
     });
 
   };
 
   return (
-    <div className='container-fluid'>
 
-      <div className="row">
-        {/* Sidebar */}
-        <div className='col-sm-3'>
-          <div className='sidebar'>
+    <div className='sidebar-container'>
 
-            <h2>Sidebar Filter</h2>
+      <div className='sidebar'>
 
-            {categories.length > 0 ? (
-              categories.map((category) => (
-                <div className='category-item' key={category.slug}>
-                  <input type="checkbox" id={category.slug}
-                    checked={selectedCategories.includes(category.slug)}
-                    onChange={() => handleCategoryChange(category.slug)} />
+        <h4 className='sidebar-title'>
+          Sidebar Filter
+        </h4>
 
-                  <label htmlFor={category.slug}>
-                    {category.name}
-                  </label>
-                </div>
-              ))
-            ) : (
-              <p>Loading...</p>
-            )
-            }
-          </div>
-        </div>
+        {
 
-        {/* Products */}
-        <div className='col-sm-9'>
-          <div className='products-section'>
-            <h2>Products</h2>
-            <div className='products-grid'>
-              {products.length > 0 ? (
-                products.map((product) => (
-                  <div className='product-card' key={product.id}>
-                    <img src={product.thumbnail}
-                      alt={product.title} />
+          categories.length > 0 ? (
 
-                    <h3>{product.title}</h3>
+            categories.map((category) => (
 
-                    <p>${product.price}</p>
-                  </div>
-                ))
+              <div
+                key={category.slug}
+                className='category-item'
+              >
 
-              ) : (
-                <p>Select Category</p>
-              )
-              }
-            </div>
-          </div>
-        </div>
+                <input
+                  type='checkbox'
+                  id={category.slug}
+                  checked={selectedCategories.some(
+                    (item) => item.slug === category.slug
+                  )}
+                  onChange={() =>
+                    handleCategoryChange(category)
+                  }
+                />
+
+                <label htmlFor={category.slug}>
+
+                  {category.name}
+
+                </label>
+
+              </div>
+
+            ))
+
+          ) : (
+
+            <p>Loading...</p>
+
+          )
+
+        }
 
       </div>
-    </div >
+
+    </div>
+
   );
 };
 

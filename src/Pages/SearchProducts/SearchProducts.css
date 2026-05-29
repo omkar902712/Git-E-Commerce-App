@@ -1,15 +1,17 @@
-/* SearchProducts.css */
+/* ProductDisplay.css */
+
+.products-display {
+    padding: 20px;
+}
 
 .product-card {
     background: #fff;
-    border: 1px solid #f0f0f0;
-    border-radius: 8px;
-    padding: 16px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid #eaeaea;
+    border-radius: 10px;
+    padding: 15px;
     height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    transition: 0.3s ease;
+    cursor: pointer;
 }
 
 .product-card:hover {
@@ -17,56 +19,32 @@
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-.img-container {
+/* Product Image */
+.product-image {
     width: 100%;
-    height: 180px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-}
-
-.search-product-img {
-    max-width: 100%;
-    max-height: 100%;
+    height: 220px;
     object-fit: contain;
+    margin-bottom: 15px;
 }
 
+/* Product Title */
 .product-title {
-    font-size: 1rem;
-    font-weight: 500;
+    font-size: 16px;
+    font-weight: 600;
     color: #333;
-    margin: 12px 0 8px 0;
-    /* Limit title to 2 lines */
+    margin-bottom: 10px;
+
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+
     overflow: hidden;
 }
 
+/* Product Price */
 .product-price {
-    font-size: 1.2rem;
+    font-size: 18px;
     font-weight: 700;
-    color: #222;
-}
-
-.view-details-btn {
-    background-color: #f43397; /* Meesho Pink */
-    color: white;
-    border: none;
-    padding: 8px 0;
-    border-radius: 4px;
-    font-weight: 600;
-    transition: background 0.3s;
-}
-
-.view-details-btn:hover {
-    background-color: #d12a7d;
-    color: white;
-}
-
-.no-results {
-    text-align: center;
-    padding: 50px;
-    color: #888;
+    color: #f43397;
+    margin-bottom: 0;
 }

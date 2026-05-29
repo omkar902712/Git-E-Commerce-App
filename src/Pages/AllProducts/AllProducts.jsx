@@ -20,7 +20,7 @@ const AllProducts = () => {
             <div className="product-card w-100 d-flex flex-column p-3 border rounded shadow-sm">
 
               {/* Link only wraps the clickable content area */}
-              <Link to={`/product/${item.id}`} className="product-link text-decoration-none text-dark d-flex flex-column flex-grow-1">
+              <Link to={`/product/${item.id}`} className="product-link text-decoration-none text-dark d-flex flex-column grow">
 
                 <span className="badge bg-secondary align-self-start">
                   Item #{index + 1}
@@ -38,15 +38,21 @@ const AllProducts = () => {
                   </h3>
                 </div>
 
-                <div className="viewDetails">
+                <div className="rating-box d-flex align-items-center">
+                  <h3 className="alert alert-info">
+                    Rating : {item.rating} / 5
+                  </h3>
+                </div>
+
+                {/* <div className="viewDetails">
                   <button className="btn btn-primary btn-sm w-100">
                     View Details
                   </button>
-                </div>
+                </div> */}
               </Link>
 
               {/* Button sits safely outside the Link but inside the Flex card */}
-              
+
 
             </div>
           </div>
