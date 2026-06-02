@@ -24,7 +24,7 @@ const CartIsZero = () => {
           className="empty-cart-image"
         />
 
-        <h2>Your cart is empty</h2>
+        <h2> Your Cart Is Empty </h2>
 
         <p>
           Just relax, let us help you find some first-class products
