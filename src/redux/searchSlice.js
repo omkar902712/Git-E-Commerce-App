@@ -1,8 +1,8 @@
-import createSlice from '@reduxjs/toolkit';
+import {createSlice} from '@reduxjs/toolkit';
 
 const searchSlice = createSlice({
   name:'search',
-  
+
   initialState:{
     searchTerm:'',
   },

@@ -1,19 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const cartSlice = createSlice({
-
-  name: 'cart',
+  name: "cart",
 
   initialState: {
-    count: 0,
+    cartItems: [],
   },
 
   reducers: {
-    increment: (state) => {
-      state.count = state + 1;
-    }
+    addToCart: (state, action) => {
+      state.cartItems.push(action.payload);
+    },
   },
 });
 
-export const { increment } = cartSlice.actions;
+export const { addToCart } = cartSlice.actions;
+
 export default cartSlice.reducer;

@@ -1,49 +1,97 @@
 import React, { useState } from "react";
-import './Header.css';
 import { Link } from "react-router-dom";
-import Logo_Img from '../../assets/Images/Header/Logo.jpg';
+import { useDispatch, useSelector } from "react-redux";
 
-const Header = ({ setSearch }) => {
-  const [visible, setVisible] = useState(false);
+import "./Header.css";
+import Logo_Img from "../../assets/Images/Header/Logo.jpg";
+
+import { setSearchTerm } from "../../Redux/searchSlice";
+
+import { CiUser, CiShoppingCart } from "react-icons/ci";
+
+const Header = () => {
+  const dispatch = useDispatch();
+
+  const cartItems = useSelector(
+    (state) => state.cartHome.cartItems
+  );
+
+  const [showProfile, setShowProfile] = useState(false);
+
+  const handleSearch = (e) => {
+    dispatch(setSearchTerm(e.target.value));
+  };
+
+  const toggleProfile = () => {
+    setShowProfile((prev) => !prev);
+  };
 
   return (
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-sm-2 ps-5">
+    <header className="header">
+      <div className="header_container">
+
+        {/* Logo */}
+        <div className="logo_section">
           <Link to="/">
-            <img src={Logo_Img} alt="E Comm Logo" className="appLogo" />
+            <img
+              src={Logo_Img}
+              alt="Logo"
+              className="appLogo"
+            />
           </Link>
         </div>
 
-        <div className="col-sm-1"> </div>
-
-        <div className="col-sm-5 mt-3">          
-          <input type="text" className="form-control search" placeholder="Search Products"
-            onChange={(e) => setSearch(e.target.value)} />
+        {/* Search */}
+        <div className="search_section">
+          <input
+            type="text"
+            className="search_input"
+            placeholder="Search products..."
+            onChange={handleSearch}
+          />
         </div>
 
-        <div className="col-sm-1"> </div>
+        {/* Right Section */}
+        <div className="action_section">
 
-        <div className="col-sm-1 ps-3 mt-3">
-          <Link className="profile_style"
-            onClick={() => setVisible(!visible)}> Profile </Link>
+          {/* Profile */}
+          <div className="profile_container">
+            <button
+              className="profile_btn"
+              onClick={toggleProfile}
+            >
+              <CiUser className="profile_icon" />
+              <span>Profile</span>
+            </button>
+
+            {showProfile && (
+              <div className="profile_dropdown">
+                <Link to="/">My Profile</Link>
+                <Link to="/">My Orders</Link>
+                <Link to="/">Wishlist</Link>
+                <Link to="/">Logout</Link>
+              </div>
+            )}
+          </div>
+
+          {/* Cart */}
+          <Link to="/cartPage" className="cart_btn">
+            <div className="cart_wrapper">
+              <CiShoppingCart className="cart_icon" />
+
+              {cartItems.length > 0 && (
+                <span className="cart_badge">
+                  {cartItems.length}
+                </span>
+              )}
+            </div>
+
+            <span>Cart</span>
+          </Link>
+
         </div>
-
-        <div className="col-sm-1 ps-5 mt-3">
-          <Link className="cart_style"> Cart </Link>
-        </div>
-
       </div>
-
-      {visible && (
-        <div className="profile_dropdown">
-          <Link> User Name </Link> <hr />
-          <Link> User Order </Link> <hr />
-          <Link> Delete Account </Link> <hr />
-          <Link> Logout </Link>
-        </div>
-      )}     
-    </div>
+    </header>
   );
 };
 

@@ -1,12 +1,12 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { increment } from "./cartSlice";
-import { sertSearchTerm } from "./searchSlice";
+// store.js
+import { configureStore } from '@reduxjs/toolkit';
 
-export const stpre = configureStore({
+import cartReducer from './cartSlice';
+import searchReducer from './searchSlice';
+
+export const store = configureStore({
   reducer: {
     cartHome: cartReducer,
     searchHome: searchReducer,
   },
 });
-
-    

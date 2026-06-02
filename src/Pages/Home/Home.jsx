@@ -26,7 +26,7 @@ const Home = () => {
 
     <div className='container-fluid'>
 
-      {/* Header Section */}
+      {/* Header */}
       <div className='row'>
 
         <Header setSearch={setSearch} />
@@ -58,25 +58,28 @@ const Home = () => {
 
         {/* Products */}
         <div className='col-sm-10 mt-4'>
-          {sidebarFilterActive ?
-            (<ProductsDisplay products={sidebarProducts} />) : selectedCategory ? (
-              <ProductsDisplay
-                selectedCategory={selectedCategory}
-              />
 
-            ) : search.length > 0 ? (
+          {/* Sidebar Filter Products */}
+          {sidebarFilterActive ? (
 
-              <SearchProducts
-                search={search}
-              />
+            <ProductsDisplay products={sidebarProducts} />
 
-            ) : (
+          ) : search.length > 0 ? (
 
-              <AllProducts />
+            /* Search Products */
+            <SearchProducts search={search} />
 
-            )
+          ) : selectedCategory ? (
 
-          }
+            /* Category Products */
+            <ProductsDisplay selectedCategory={selectedCategory} />
+
+          ) : (
+
+            /* All Products */
+            <AllProducts />
+
+          )}
 
         </div>
 
@@ -89,6 +92,7 @@ const Home = () => {
     </div>
 
   );
+
 };
 
 export default Home;

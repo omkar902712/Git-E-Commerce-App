@@ -1,84 +1,79 @@
-import React from 'react';
-
+import React, { useEffect, useState } from 'react';
+import './ProductDisplay.css';
 import { Link } from 'react-router-dom';
 
-import './ProductDisplay.css';
+const ProductsDisplay = ({
+  selectedCategory,
+  products,
+  searchTerm = '',
+}) => {
 
-const ProductsDisplay = ({ products = [] }) => {
+  const [allProducts, setAllProducts] = useState([]);
 
-  return (
+  useEffect(() => {
 
-    <div className='products-display'>
+    // Sidebar products
+    if (products && products.length > 0) {
+      setAllProducts(products);
+      return;
+    }
 
-      {
-        products.length === 0 ? (
+    // Category products
+    if (selectedCategory) {
+      fetch(`https://dummyjson.com/products/category/${selectedCategory}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setAllProducts(data.products || []);
+        });
+    }
+  }, [selectedCategory, products]);
 
-          <div className='text-center mt-5'>
-
-            <h4>No Products Found</h4>
-
-          </div>
-
-        ) : (
-
-          <div className='row'>
-
-            {
-
-              products.map((product) => (
-
-                <div
-                  key={product.id}
-                  className='col-lg-3 col-md-4 col-sm-6 mb-4'
-                >
-
-                  <div className='product-card'>
-
-                    <Link
-                      to={`/product/${product.id}`}
-                      className='text-decoration-none text-dark'
-                    >
-
-                      {/* Product Image */}
-                      <img
-                        src={product.thumbnail}
-                        alt={product.title}
-                        className='product-image'
-                      />
-
-                      {/* Product Title */}
-                      <h5 className='product-title'>
-
-                        {product.title}
-
-                      </h5>
-
-                      {/* Product Price */}
-                      <p className='product-price'>
-
-                        ${product.price}
-
-                      </p>
-
-                    </Link>
-
-                  </div>
-
-                </div>
-
-              ))
-
-            }
-
-          </div>
-
-        )
-      }
-
-    </div>
-
+  // Search filter
+  const filteredProducts = allProducts.filter((item) =>
+    item?.title?.toLowerCase()
+      .includes(searchTerm.toLowerCase())
   );
 
+  return (
+    <div className="container-fluid py-4">
+      <div className="row g-4">
+        {filteredProducts.map((item, index) => (          
+          <div key={item.id}
+            className="col-12 col-sm-6 col-lg-4 d-flex">
+            <div className="product-card w-100">
+              <Link to={`/product/${item.id}`}
+                className="product-link">
+                <span className="badge bg-secondary product-badge">
+                  Item #{index + 1}
+                </span>
+
+                <div className="img-container">
+                  <img src={item.thumbnail}
+                    alt={item.title} className="products-img" />
+                </div>
+
+                <div className="product-info">
+                  <h5 className="product-title">
+                    {item.title}
+                  </h5>
+
+                  <h3 className="product-price">
+                    ${item.price}
+                  </h3>
+
+                  <div className="rating-box">
+                    <span className="rating-text">
+                      ⭐ {item.rating} / 5
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default ProductsDisplay;

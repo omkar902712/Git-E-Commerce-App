@@ -7,7 +7,14 @@ import Header from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
 import CategoriesNavbar from "../../Components/CategoriesNavbar/CategoriesNavbar";
 
+// redux
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../redux/cartSlice";
+
 const ProductDetails = () => {
+  // redux state
+  const dispatch = useDispatch();
+
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [error, setError] = useState('');
@@ -25,13 +32,18 @@ const ProductDetails = () => {
       .catch(() => setError("Product Not Found"));
   }, [id]);
 
-  if (error) return <div className="text-center mt-5"><h3>{error}</h3></div>;
-  if (!product) return <div className="text-center mt-5"><h4>Loading....!</h4></div>;
+  if (error)
+    return
+    <div className="text-center mt-5"><h3>{error}</h3></div>;
+
+  if (!product)
+    return
+    <div className="text-center mt-5"><h4>Loading....!</h4></div>;
 
   return (
     <div className="container-fluid p-0">
       <Header />
-      <hr/>      
+      <hr />
 
       {/* Main Container */}
       <div className="container my-5">
@@ -46,9 +58,16 @@ const ProductDetails = () => {
                 className="imgDetails img-fluid rounded"
               />
             </div>
+
             <div className="buttons-box d-flex justify-content-between mt-3">
-              <button className="cart-btn btn w-50 me-2">Add To Cart</button>
-              <button className="buy-btn btn w-50 ms-2">Buy Now</button>
+              <button className="cart-btn btn w-50 me-2"
+              onClick={() => dispatch(addToCart(product))}>
+                Add To Cart
+              </button>
+
+              <button className="buy-btn btn w-50 ms-2">
+                Buy Now
+              </button>
             </div>
           </div>
 
