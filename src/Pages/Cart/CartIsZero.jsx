@@ -9,20 +9,15 @@ const CartIsZero = () => {
   return (
     <div className="empty-cart-container">
       <Link to="/">
-        <img
-          src={LogoImg}
-          alt="ShopVibe"
-          className="empty-cart-logo"
-        />        
+        <img src={LogoImg} 
+          alt="ShopVibe" className="empty-cart-logo" />
       </Link>
 
-      <div className="empty-cart-content">
+      <hr />
 
-        <img
-          src={CartIsEmpty}
-          alt="Empty Cart"
-          className="empty-cart-image"
-        />
+      <div className="empty-cart-content">
+        <img src={CartIsEmpty}
+          alt="Empty Cart" className="empty-cart-image" />
 
         <h2> Your Cart Is Empty </h2>
 
@@ -35,9 +30,7 @@ const CartIsZero = () => {
             Start Shopping
           </button>
         </Link>
-
       </div>
-
     </div>
   );
 };
