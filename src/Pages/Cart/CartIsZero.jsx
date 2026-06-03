@@ -13,7 +13,7 @@ const CartIsZero = () => {
           alt="ShopVibe" className="empty-cart-logo" />
       </Link>
 
-      <hr />
+      <hr/>
 
       <div className="empty-cart-content">
         <img src={CartIsEmpty}
