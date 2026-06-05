@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import './ProductDetails.css';
 
@@ -18,7 +18,6 @@ const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [error, setError] = useState('');
-  
 
   useEffect(() => {
     fetch(`https://dummyjson.com/products/${id}`)
@@ -35,11 +34,11 @@ const ProductDetails = () => {
 
   if (error)
     return
-    <div className="text-center mt-5"><h3>{error}</h3></div>;
+  <div className="text-center mt-5"><h3>{error}</h3></div>;
 
   if (!product)
     return
-    <div className="text-center mt-5"><h4>Loading....!</h4></div>;
+  <div className="text-center mt-5"><h4>Loading....!</h4></div>;
 
   return (
     <div className="container-fluid p-0">
@@ -53,22 +52,20 @@ const ProductDetails = () => {
           {/* LEFT COLUMN: IMAGE & ACTION BUTTONS */}
           <div className="col-lg-5 col-md-6 col-12 text-center mb-4 mb-md-0">
             <div className="image-section">
-              <img
-                src={product.thumbnail}
-                alt={product.title}
-                className="imgDetails img-fluid rounded"
-              />
+              <img src={product.thumbnail} alt={product.title}
+                className="imgDetails img-fluid rounded" />
             </div>
 
             <div className="buttons-box d-flex justify-content-between mt-3">
               <button className="cart-btn btn w-50 me-2"
-              onClick={() => dispatch(addToCart(product))}>
+                onClick={() => dispatch(addToCart(product))}>
                 Add To Cart
-              </button>
+              </button>             
 
-              <button className="buy-btn btn w-50 ms-2">
+              <Link to={`/buynow/${product.id}`} 
+                className="buy-btn btn w-50 ms-2">
                 Buy Now
-              </button>
+              </Link>
             </div>
           </div>
 
@@ -102,7 +99,6 @@ const ProductDetails = () => {
               </h3>
             </div>
           </div>
-
         </div>
       </div>
 

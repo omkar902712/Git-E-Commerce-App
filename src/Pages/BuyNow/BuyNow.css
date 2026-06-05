@@ -1,1 +1,188 @@
- 
+.buynow-container {
+  padding: 20px;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+}
+
+/* Logo */
+
+.logo-wrapper {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.buynow-logo {
+  width: 180px;
+  cursor: pointer;
+}
+
+/* Product Card */
+
+.product-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.08);
+}
+
+.product-image {
+  width: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.product-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.product-description {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 20px;
+   font-size: 1.5rem;
+}
+
+/* Price Section */
+
+.price-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.current-price {
+  font-size: 2rem;
+  color: #dc3545;
+  font-weight: bold;
+}
+
+.old-price {
+  text-decoration: line-through;
+  color: gray;
+  font-size: 1.2rem;
+}
+
+.discount-badge {
+  background-color: #198754;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+/* Rating */
+
+.rating-box {
+  display: inline-block;
+  background-color: #d1ecf1;
+  color: #0c5460;
+  padding: 10px 15px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  font-weight: 600;
+   font-size: 2rem;
+}
+
+/* Return Policy */
+
+.return-policy p {
+  margin-top: 8px;
+  color: #555;
+   font-size: 2rem;
+}
+
+/* Price Details Card */
+
+.price-details-card {
+  background-color: white;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.08);
+  position: sticky;
+  top: 20px;
+}
+
+.price-details-card h3 {
+  font-weight: 700;
+}
+
+/* Rows */
+
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+  font-size: 1.1rem;
+   font-size: 2rem;
+}
+
+.total-row {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+/* Quantity */
+
+.quantity-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.quantity-box button {
+  width: 35px;
+  height: 35px;
+  border: none;
+  background-color: #eeeeee;
+  border-radius: 50%;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.quantity-box button:hover {
+  background-color: #dcdcdc;
+}
+
+.quantity-box span {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* Button */
+
+.place-order-btn {
+  width: 100%;
+  border: none;
+  background-color: #ff9900;
+  color: white;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 15px;
+  transition: 0.3s;
+}
+
+.place-order-btn:hover {
+  background-color: #e68a00;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+  .product-title {
+    margin-top: 20px;
+    font-size: 1.6rem;
+  }
+
+  .price-details-card {
+    position: static;
+  }
+} 

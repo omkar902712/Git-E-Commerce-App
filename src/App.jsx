@@ -9,6 +9,7 @@ import Home from './Pages/Home/Home';
 import ProductDetails from './Pages/ProductDetails/ProductDetails';
 import CartPage from './Pages/Cart/CartPage';
 import CartIsZero from './Pages/Cart/CartIsZero';
+import BuyNow from './Pages/BuyNow/BuyNow';
 
 const App = () => {
   return (
@@ -17,7 +18,10 @@ const App = () => {
         <Route path="*" element={<h1>404 Not Found</h1>} />
         
         <Route path="/" element={<Home />} />        
+        
         <Route path="/product/:id" element={<ProductDetails />} />
+        <Route path="/buynow/:id" element={<BuyNow />} />
+
         <Route path="/cartPage" element={<CartPage />} />
         <Route path="/cartIsZero" element={<CartIsZero />} />
       </Routes>
