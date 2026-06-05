@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { removeFromCart } from "../../redux/cartSlice";
 
 const CartPage = () => {
-
+  // used to redux dispatch the action to remove item from cart
   const dispatch = useDispatch();
 
   const cartItems = useSelector(
@@ -22,6 +22,13 @@ const CartPage = () => {
   if (cartItems.length === 0) {
     return <CartIsZero />;
   }
+
+  // calculate total price of all items in cart
+  const totalPrice = cartItems.reduce(
+    (total, item) => total + item.price, 0);
+
+  // Free delivery for orders above $100
+  const deliverycharges = totalPrice > 100 ? 50 : 0;
 
   return (
     <div className="container-fluid cart-page">
@@ -69,13 +76,14 @@ const CartPage = () => {
                   {item.returnPolicy}
                 </p>
 
-                <button className="btn btn-danger remove-btn"
+                <button className="btn btn-success fs-3 border-t-neutral-50 remove_btn"
                   onClick={() =>
                     dispatch(removeFromCart(item.id))
                   }
                 >
                   Remove
                 </button>
+
               </div>
             </div>
           ))}
@@ -84,16 +92,30 @@ const CartPage = () => {
         {/* Right Side */}
         <div className="col-lg-4">
           <div className="cart-summary">
-            <h3>Order Summary</h3>
+            <h3 className="!text-green-600">
+              Order Summary
+            </h3>
 
             <hr />
 
-            <h5>
-              Total Items : {cartItems.length}
-            </h5>
+            <h3>
+              Product Details (Total Items : {cartItems.length})
+            </h3>
 
-            <button className="btn btn-success checkout-btn">
-              Proceed To Checkout
+            <hr className="my-4 border-gray-400" />
+
+            <h3> Delivery Charges : {deliverycharges} </h3>
+            <span className="text-lg text-red-500">
+              Product greater than 100, then 50 apply
+            </span>
+
+            <hr className="my-4 border-gray-400" />
+
+            <h3> Product Price : {totalPrice} </h3>
+
+
+            <button className="bg-purple-600 text-white py-3 rounded-md font-medium !text-2xl checkout-btn mt-4">
+              Proceed to Checkout
             </button>
           </div>
         </div>

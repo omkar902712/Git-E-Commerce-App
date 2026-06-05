@@ -18,6 +18,7 @@ const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [error, setError] = useState('');
+  
 
   useEffect(() => {
     fetch(`https://dummyjson.com/products/${id}`)
