@@ -92,7 +92,7 @@ const CartPage = () => {
         {/* Right Side */}
         <div className="col-lg-4">
           <div className="cart-summary">
-            <h3 className="!text-green-600">
+            <h3 className="text-success text-3xl font-bold mb-4">
               Order Summary
             </h3>
 
