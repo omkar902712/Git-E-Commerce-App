@@ -38,7 +38,7 @@ const AllProducts = () => {
                   </h3>
                 </div>
 
-                <div className="rating-box d-flex align-items-center">
+                <div className="d-flex align-items-center">
                   <h3 className="alert alert-info">
                     Rating : {item.rating} / 5
                   </h3>

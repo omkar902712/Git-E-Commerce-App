@@ -1,55 +1,50 @@
-import React, { useEffect, useState } from 'react';
-import './ProductDisplay.css';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import "./ProductDisplay.css";
+import { Link } from "react-router-dom";
 
 const ProductsDisplay = ({
   selectedCategory,
   products,
-  searchTerm = '',
 }) => {
 
   const [allProducts, setAllProducts] = useState([]);
 
   useEffect(() => {
 
-    // Sidebar products
-    if (products && products.length > 0) {
+    if (products) {
       setAllProducts(products);
       return;
     }
 
-    // Category products
     if (selectedCategory) {
-      fetch(`https://dummyjson.com/products/category/${selectedCategory}`)
+      fetch(
+        `https://dummyjson.com/products/category/${selectedCategory}`
+      )
         .then((res) => res.json())
         .then((data) => {
           setAllProducts(data.products || []);
         });
     }
-  }, [selectedCategory, products]);
 
-  // Search filter
-  const filteredProducts = allProducts.filter((item) =>
-    item?.title?.toLowerCase()
-      .includes(searchTerm.toLowerCase())
-  );
+  }, [products, selectedCategory]);
 
   return (
     <div className="container-fluid py-4">
       <div className="row g-4">
-        {filteredProducts.map((item, index) => (          
+
+        {allProducts.map((item, index) => (
           <div key={item.id}
             className="col-12 col-sm-6 col-lg-4 d-flex">
             <div className="product-card w-100">
               <Link to={`/product/${item.id}`}
-                className="product-link">
+                className="product-link"> 
                 <span className="badge bg-secondary product-badge">
                   Item #{index + 1}
                 </span>
 
                 <div className="img-container">
-                  <img src={item.thumbnail}
-                    alt={item.title} className="products-img" />
+                  <img src={item.thumbnail} alt={item.title}
+                    className="products-img" />
                 </div>
 
                 <div className="product-info">
@@ -61,16 +56,21 @@ const ProductsDisplay = ({
                     ${item.price}
                   </h3>
 
-                  <div className="rating-box">
+                  <div>
                     <span className="rating-text">
-                      ⭐ {item.rating} / 5
+                      {item.rating} / 5
                     </span>
                   </div>
+
                 </div>
+
               </Link>
+
             </div>
           </div>
+
         ))}
+
       </div>
     </div>
   );

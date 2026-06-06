@@ -46,11 +46,8 @@ const BuyNow = () => {
       {/* Logo */}
       <div className="logo-wrapper">
         <Link to="/">
-          <img
-            src={LogoImg}
-            alt="ShopVibe"
-            className="buynow-logo"
-          />
+          <img src={LogoImg} alt="ShopVibe"
+            className="buynow-logo" />
         </Link>
       </div>
 
@@ -121,40 +118,23 @@ const BuyNow = () => {
 
           {/* Price Details */}
           <div className="col-lg-4">
-
             <div className="price-details-card">
-
               <h3>Price Details</h3>
-
               <hr />
-
               <div className="price-row">
                 <span>Price</span>
                 <span>${product.price}</span>
               </div>
 
               <div className="price-row quantity-row">
-
                 <span>Quantity</span>
-
                 <div className="quantity-box">
-
-                  <button
-                    onClick={decreaseQty}
-                  >
-                    -
-                  </button>
+                  <button onClick={decreaseQty}> - </button>
 
                   <span>{quantity}</span>
 
-                  <button
-                    onClick={increaseQty}
-                  >
-                    +
-                  </button>
-
+                  <button onClick={increaseQty}> + </button>
                 </div>
-
               </div>
 
               <hr />
@@ -169,9 +149,7 @@ const BuyNow = () => {
               </button>
 
             </div>
-
           </div>
-
         </div>
       )}
     </div>

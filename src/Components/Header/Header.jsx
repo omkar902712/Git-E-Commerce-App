@@ -22,10 +22,6 @@ const Header = () => {
     dispatch(setSearchTerm(e.target.value));
   };
 
-  const toggleProfile = () => {
-    setShowProfile((prev) => !prev);
-  };
-
   return (
     <header className="header">
       <div className="header_container">
@@ -58,7 +54,9 @@ const Header = () => {
           <div className="profile_container">
             <button
               className="profile_btn"
-              onClick={toggleProfile}
+              onClick={() =>
+                setShowProfile(!showProfile)
+              }
             >
               <CiUser className="profile_icon" />
               <span>Profile</span>
@@ -75,7 +73,10 @@ const Header = () => {
           </div>
 
           {/* Cart */}
-          <Link to="/cartPage" className="cart_btn">
+          <Link
+            to="/cartPage"
+            className="cart_btn"
+          >
             <div className="cart_wrapper">
               <CiShoppingCart className="cart_icon" />
 

@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
-
 import './SidebarFilter.css';
+
 const SidebarFilter = ({
   setSidebarProducts,
   onFilterActiveChange
 }) => {
 
   const [categories, setCategories] = useState([]);
-
   const [selectedCategories, setSelectedCategories] = useState([]);
 
   // Fetch Categories
@@ -56,83 +55,51 @@ const SidebarFilter = ({
 
   // Checkbox Handle
   const handleCategoryChange = (category) => {
-
     setSelectedCategories((prevSelected) => {
-
       const alreadySelected = prevSelected.find(
         (item) => item.slug === category.slug
       );
 
       if (alreadySelected) {
-
         return prevSelected.filter(
           (item) => item.slug !== category.slug
         );
 
       } else {
-
         return [...prevSelected, category];
-
       }
-
     });
-
   };
 
   return (
-
     <div className='sidebar-container'>
-
       <div className='sidebar'>
-
         <h4 className='sidebar-title'>
           Sidebar Filter
         </h4>
 
-        {
+        {categories.length > 0 ? (
+          categories.map((category) => (
+            <div key={category.slug} className='category-item'>
+              <input type='checkbox' id={category.slug}
+                checked={selectedCategories.some(
+                  (item) => item.slug === category.slug
+                )}
+                onChange={() =>
+                  handleCategoryChange(category)
+                } />
 
-          categories.length > 0 ? (
-
-            categories.map((category) => (
-
-              <div
-                key={category.slug}
-                className='category-item'
-              >
-
-                <input
-                  type='checkbox'
-                  id={category.slug}
-                  checked={selectedCategories.some(
-                    (item) => item.slug === category.slug
-                  )}
-                  onChange={() =>
-                    handleCategoryChange(category)
-                  }
-                />
-
-                <label htmlFor={category.slug}>
-
-                  {category.name}
-
-                </label>
-
-              </div>
-
-            ))
-
-          ) : (
-
-            <p>Loading...</p>
-
-          )
-
+              <label htmlFor={category.slug}>
+                {category.name}
+              </label>
+            </div>
+          ))
+        ) : (
+          <p>Loading...</p>
+        )
         }
-
       </div>
-
     </div>
-
   );
 };
 

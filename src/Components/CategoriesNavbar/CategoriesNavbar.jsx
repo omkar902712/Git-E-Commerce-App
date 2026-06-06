@@ -6,7 +6,6 @@ const CategoriesNavbar = ({ selectedCategory, onCategorySelect }) => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-
     fetch('https://dummyjson.com/products/categories')
       .then((res) => res.json())
       .then((data) => {

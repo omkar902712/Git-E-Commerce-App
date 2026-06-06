@@ -7,195 +7,124 @@
 /* Product Card */
 .product-card {
   background: #fff;
-
   border: 1px solid #e9edf3;
-
   border-radius: 18px;
-
   overflow: hidden;
 
   transition:
     transform 0.25s ease,
     box-shadow 0.25s ease;
-
-  height: 100%;
+    height: 100%;
 }
 
 /* Hover Effect */
 .product-card:hover {
-
   transform: translateY(-6px);
-
   box-shadow:
     0 16px 34px rgba(15, 23, 42, 0.12);
-
 }
 
 /* Link */
 .product-link {
-
   text-decoration: none;
-
   color: inherit;
-
   display: flex;
-
   flex-direction: column;
-
   height: 100%;
-
 }
 
 /* Badge */
 .product-badge {
-
   width: fit-content;
-
   margin: 16px;
-
   font-size: 14px;
-
 }
 
 /* Image Container */
 .img-container {
-
   height: 240px;
-
   background: #f8f9fa;
-
   display: flex;
-
   align-items: center;
-
   justify-content: center;
-
   overflow: hidden;
-
 }
 
 /* Image */
 .products-img {
-
   width: 100%;
-
   height: 100%;
-
   object-fit: cover;
-
   transition: transform 0.3s ease;
-
 }
 
 /* Image Hover Zoom */
 .product-card:hover .products-img {
-
   transform: scale(1.05);
-
 }
 
 /* Product Info */
 .product-info {
-
   padding: 20px;
-
   display: flex;
-
   flex-direction: column;
-
   gap: 10px;
-
   flex-grow: 1;
-
 }
 
 /* Title */
 .product-title {
-
   font-size: 24px;
-
   font-weight: 700;
-
   color: #212529;
-
   margin: 0;
-
   min-height: 60px;
-
 }
 
 /* Price */
 .product-price {
-
   font-size: 30px;
-
   font-weight: 700;
-
   color: #0d6efd;
-
   margin: 0;
-
 }
 
 /* Rating */
 .rating-box {
-
   margin-top: auto;
-
 }
 
 .rating-text {
-
   background: #e7f1ff;
-
   padding: 10px 14px;
-
   border-radius: 10px;
-
   display: inline-block;
-
   font-weight: 600;
-
   font-size: 15px;
-
 }
 
 /* Tablet */
 @media (max-width: 768px) {
-
   .img-container {
-
     height: 200px;
-
   }
 
   .product-title {
-
     font-size: 20px;
-
   }
 
   .product-price {
-
     font-size: 24px;
-
   }
-
 }
 
 /* Mobile */
 @media (max-width: 576px) {
-
   .img-container {
-
     height: 180px;
-
   }
 
   .product-info {
-
     padding: 16px;
-
   }
-
 }

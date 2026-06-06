@@ -1,35 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
-import Header from '../../Components/Header/Header';
-import Footer from '../../Components/Footer/Footer';
+import Header from "../../Components/Header/Header";
+import Footer from "../../Components/Footer/Footer";
 
-import SearchProducts from '../SearchProducts/SearchProducts';
-import HomeCarousel from '../../Components/HomeCarousel/HomeCarousel';
-import AllProducts from '../AllProducts/AllProducts';
+import SearchProducts from "../SearchProducts/SearchProducts";
+import HomeCarousel from "../../Components/HomeCarousel/HomeCarousel";
+import AllProducts from "../AllProducts/AllProducts";
 
-import CategoriesNavbar from '../../Components/CategoriesNavbar/CategoriesNavbar';
+import CategoriesNavbar from "../../Components/CategoriesNavbar/CategoriesNavbar";
 
-import SidebarFilter from '../../Components/SidebarFilter/SidebarFilter';
-import ProductsDisplay from '../ProductDisplay/ProductDisplay';
+import SidebarFilter from "../../Components/SidebarFilter/SidebarFilter";
+import ProductsDisplay from "../ProductDisplay/ProductDisplay";
 
 const Home = () => {
 
-  const [search, setSearch] = useState('');
+  const searchTerm = useSelector(
+    (state) => state.searchHome.searchTerm
+  );
 
-  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedCategory, setSelectedCategory] =
+    useState("");
 
-  const [sidebarProducts, setSidebarProducts] = useState([]);
+  const [sidebarProducts, setSidebarProducts] =
+    useState([]);
 
-  const [sidebarFilterActive, setSidebarFilterActive] = useState(false);
+  const [sidebarFilterActive, setSidebarFilterActive] =
+    useState(false);
 
   return (
-
-    <div className='container-fluid'>
+    <div className="container-fluid">
 
       {/* Header */}
-      <div className='row'>
+      <div className="row">
 
-        <Header setSearch={setSearch} />
+        <Header />
 
         <CategoriesNavbar
           selectedCategory={selectedCategory}
@@ -44,10 +49,10 @@ const Home = () => {
       <br />
 
       {/* Main Section */}
-      <div className='row'>
+      <div className="row">
 
         {/* Sidebar */}
-        <div className='col-sm-2'>
+        <div className="col-sm-2">
 
           <SidebarFilter
             setSidebarProducts={setSidebarProducts}
@@ -57,32 +62,26 @@ const Home = () => {
         </div>
 
         {/* Products */}
-        <div className='col-sm-10 mt-4'>
+        <div className="col-sm-10 mt-4">
 
-          {/* Sidebar Filter Products */}
           {sidebarFilterActive ? (
 
             <ProductsDisplay products={sidebarProducts} />
 
-          ) : search.length > 0 ? (
+          ) : searchTerm.trim() ? (
 
-            /* Search Products */
-            <SearchProducts search={search} />
+            <SearchProducts />
 
           ) : selectedCategory ? (
 
-            /* Category Products */
-            <ProductsDisplay selectedCategory={selectedCategory} />
+            <ProductsDisplay
+              selectedCategory={selectedCategory}
+            />
 
           ) : (
-
-            /* All Products */
             <AllProducts />
-
           )}
-
         </div>
-
       </div>
 
       <hr />
@@ -90,9 +89,7 @@ const Home = () => {
       <Footer />
 
     </div>
-
   );
-
 };
 
 export default Home;
