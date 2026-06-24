@@ -1,6 +1,9 @@
 import React from 'react';
 import './Footer.css';
 
+import Logo_Img from "../../assets/Images/Header/Logo.jpg";
+import { Link } from 'react-router-dom';
+
 const Footer = () => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -56,11 +59,19 @@ const Footer = () => {
 
       {/* Logo and Language Section */}
       <div className="footer-logo-section">
-        <img 
+
+        {/* <img 
           src="https://pngimg.com/uploads/amazon/amazon_PNG11.png" 
           alt="Amazon Logo" 
           className="footer-logo" 
-        />
+        /> */}
+
+        <div>
+          <Link to="/">
+            <img src={Logo_Img} alt="Logo" className="footer-logo" />
+          </Link>
+        </div>
+
         <div className="footer-settings">
           <span className="setting-box">English</span>
           <span className="setting-box">$ USD - U.S. Dollar</span>
@@ -74,7 +85,9 @@ const Footer = () => {
           <span>Privacy Notice</span>
           <span>Your Ads Privacy Choices</span>
         </div>
-        <p className="copyright">© 1996-2027s, Amazon.com, Inc. or its affiliates</p>
+        <p className="copyright">
+          &copy; 1996-2027s, ShopVibe.com, Inc. or its affiliates
+        </p>
       </div>
     </footer>
   );

@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import "./Header.css";
+
 import Logo_Img from "../../assets/Images/Header/Logo.jpg";
 
-import { setSearchTerm } from "../../Redux/searchSlice";
+import { setSearchTerm } from "../../redux/searchSlice";
 
 import { CiUser, CiShoppingCart } from "react-icons/ci";
 
@@ -29,22 +30,16 @@ const Header = () => {
         {/* Logo */}
         <div className="logo_section">
           <Link to="/">
-            <img
-              src={Logo_Img}
-              alt="Logo"
-              className="appLogo"
-            />
+            <img src={Logo_Img} alt="Logo" className="appLogo" />
           </Link>
         </div>
 
+
         {/* Search */}
         <div className="search_section">
-          <input
-            type="text"
-            className="search_input"
+          <input type="text" className="search_input"
             placeholder="Search products..."
-            onChange={handleSearch}
-          />
+            onChange={handleSearch} />
         </div>
 
         {/* Right Section */}
@@ -52,12 +47,8 @@ const Header = () => {
 
           {/* Profile */}
           <div className="profile_container">
-            <button
-              className="profile_btn"
-              onClick={() =>
-                setShowProfile(!showProfile)
-              }
-            >
+            <button className="profile_btn"
+              onClick={() => setShowProfile(!showProfile)}>
               <CiUser className="profile_icon" />
               <span>Profile</span>
             </button>
@@ -65,8 +56,7 @@ const Header = () => {
             {showProfile && (
               <div className="profile_dropdown">
                 <Link to="/">My Profile</Link>
-                <Link to="/">My Orders</Link>
-                <Link to="/">Wishlist</Link>
+                <Link to="/register"> Register </Link>
                 <Link to="/">Logout</Link>
               </div>
             )}
