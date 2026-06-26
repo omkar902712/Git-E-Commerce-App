@@ -56,7 +56,7 @@ const Footer = () => {
       </div>
 
       <hr className="footer-divider" />
-
+ 
       {/* Logo and Language Section */}
       <div className="footer-logo-section">
 
