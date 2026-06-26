@@ -57,7 +57,7 @@ const Header = () => {
               <div className="profile_dropdown">
                 <Link to="/">My Profile</Link>
                 {/* <Link to="/register"> Register </Link> */}
-                <Link to="/"> Login </Link>
+                <Link to="/login"> Login </Link>
               </div>
             )}
           </div>
