@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { z } from "zod";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Register.css";
 
+// schema - validation 
 const registerSchema = z
   .object({
     fullName: z
@@ -33,6 +34,11 @@ const registerSchema = z
   });
 
 const Register = () => {
+
+  const navigate = useNavigate();
+  const [errors, setErrors] = useState({});
+
+  // state object - input name
   const [formData, setFormData] = useState({
     fullName: "",
     gender: "",
@@ -42,8 +48,9 @@ const Register = () => {
     confirmPassword: "",
   });
 
-  const [errors, setErrors] = useState({});
-
+  // input onChange - call handleChange function
+  // ...formData 
+  // e.target.name - e.target.value
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -51,6 +58,7 @@ const Register = () => {
     });
   };
 
+  // form onSubmit - handleSubmit
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -69,8 +77,17 @@ const Register = () => {
 
     setErrors({});
 
+    // Save Data Into Local Storage
+    localStorage.setItem(
+      "userData",
+      JSON.stringify(formData)
+    );
+
     console.log("Valid Data:", formData);
+
     alert("Registration Successful");
+
+    navigate('/login');
   };
 
   return (
@@ -80,7 +97,7 @@ const Register = () => {
 
         <form onSubmit={handleSubmit} className="register-form">
 
-          {/* Full Name */}
+          {/* Input Full Name & Error */}
           <div className="form-group">
             <input
               type="text"
@@ -100,7 +117,7 @@ const Register = () => {
 
           </div>
 
-          {/* Gender */}
+          {/* Radio Gender & Error */}
           <div className="form-group">
             <div className="gender-box">
               <label>
@@ -136,7 +153,7 @@ const Register = () => {
 
           </div>
 
-          {/* Phone */}
+          {/* Input Phone & Error */}
           <div className="form-group">
             <input
               type="tel"
@@ -156,7 +173,7 @@ const Register = () => {
 
           </div>
 
-          {/* Email */}
+          {/* Input Email & Error */}
           <div className="form-group">
             <input
               type="email"
@@ -176,7 +193,7 @@ const Register = () => {
 
           </div>
 
-          {/* Password */}
+          {/* Input Password & Error */}
           <div className="form-group">
             <input
               type="password"
@@ -196,7 +213,7 @@ const Register = () => {
 
           </div>
 
-          {/* Confirm Password */}
+          {/* Input Confirm Password & Error */}
           <div className="form-group">
             <input
               type="password"
@@ -207,11 +224,11 @@ const Register = () => {
             />
 
             <div className="errorStyle">
-            {errors.confirmPassword && (
-              <small style={{ color: "red" }}>
-                {errors.confirmPassword}
-              </small>
-            )}
+              {errors.confirmPassword && (
+                <small style={{ color: "red" }}>
+                  {errors.confirmPassword}
+                </small>
+              )}
             </div>
 
           </div>
@@ -224,21 +241,11 @@ const Register = () => {
 
         <br />
 
-        {/* Link - Go To Home Page, Login */}
+        {/* Link - Go To Login Page */}
         <div className="row">
-          <div className="col-sm-4">
-            <Link to="/">
-              <h5>Go To Home Page</h5>
-            </Link>
-          </div>
-
-          <div className="col-sm-6"></div>
-
-          <div className="col-sm-2">
-            <Link to="/login">
-              <h5>Login</h5>
-            </Link>
-          </div>
+          <h4>Already Have Account? &nbsp;
+            <Link to="/login" style={{textDecoration:'none'}}> Login </Link>
+          </h4>
         </div>
       </div>
     </div>

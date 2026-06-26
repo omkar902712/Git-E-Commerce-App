@@ -11,6 +11,7 @@ import CartPage from './Pages/Cart/CartPage';
 import CartIsZero from './Pages/Cart/CartIsZero';
 import BuyNow from './Pages/BuyNow/BuyNow';
 import Register from './Pages/Register/Register';
+import Login from './Pages/Login/Login';
 
 const App = () => {
   return (
@@ -18,15 +19,17 @@ const App = () => {
       <Routes>
         <Route path="*" element={<h1>404 Not Found</h1>} />
 
-        <Route path="/register" element={<Register/>} />
-        
-        <Route path="/" element={<Home />} />        
-        
+        <Route path="/register" element={<Register />} />
+
+        <Route path="/" element={<Home />} />
+
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/buynow/:id" element={<BuyNow />} />
 
         <Route path="/cartPage" element={<CartPage />} />
         <Route path="/cartIsZero" element={<CartIsZero />} />
+
+        <Route path="/login" element={<Login />} />
       </Routes>
     </>
   )

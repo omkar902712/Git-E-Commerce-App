@@ -56,8 +56,8 @@ const Header = () => {
             {showProfile && (
               <div className="profile_dropdown">
                 <Link to="/">My Profile</Link>
-                <Link to="/register"> Register </Link>
-                <Link to="/">Logout</Link>
+                {/* <Link to="/register"> Register </Link> */}
+                <Link to="/"> Login </Link>
               </div>
             )}
           </div>

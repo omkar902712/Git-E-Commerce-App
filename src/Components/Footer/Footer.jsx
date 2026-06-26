@@ -21,28 +21,28 @@ const Footer = () => {
         <div className="footer-column">
           <h3>Get to Know Us</h3>
           <ul>
-            <li>Careers</li>
-            <li>Blog</li>
-            <li>About Amazon</li>
-            <li>Investor Relations</li>
+            <li> Careers </li>
+            <li> Blog </li>
+            <li> About ShopVibe </li>
+            <li> Investor Relations </li>
           </ul>
         </div>
         <div className="footer-column">
           <h3>Make Money with Us</h3>
           <ul>
-            <li>Sell products on Amazon</li>
-            <li>Sell on Amazon Business</li>
+            <li>Sell products on ShopVibe </li>
+            <li>Sell on ShopVibe Business</li>
             <li>Become an Affiliate</li>
             <li>Advertise Your Products</li>
           </ul>
         </div>
         <div className="footer-column">
-          <h3>Amazon Payment Products</h3>
+          <h3>ShopVibe Payment Products</h3>
           <ul>
-            <li>Amazon Business Card</li>
+            <li>ShopVibe Business Card</li>
             <li>Shop with Points</li>
             <li>Reload Your Balance</li>
-            <li>Amazon Currency Converter</li>
+            <li>ShopVibe Currency Converter</li>
           </ul>
         </div>
         <div className="footer-column">
