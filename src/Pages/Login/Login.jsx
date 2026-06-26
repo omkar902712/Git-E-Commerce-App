@@ -96,7 +96,7 @@ const Login = () => {
     }
     else {
       alert("Invalid Email/Phone or Password");
-    }
+    } 
   };
 
   return (
