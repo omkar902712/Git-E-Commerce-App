@@ -244,7 +244,7 @@ const Register = () => {
         {/* Link - Go To Login Page */}
         <div className="row">
           <h4>Already Have Account? &nbsp;
-            <Link to="/login" style={{textDecoration:'none'}}> Login </Link>
+            <Link to="/login" style={{textDecoration:'none'}}> Login </Link>  
           </h4>
         </div>
       </div>

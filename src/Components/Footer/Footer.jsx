@@ -76,7 +76,7 @@ const Footer = () => {
           <span className="setting-box">English</span>
           <span className="setting-box">$ USD - U.S. Dollar</span>
         </div>
-      </div>
+      </div> 
 
       {/* Bottom Legal Section */}
       <div className="footer-bottom">
