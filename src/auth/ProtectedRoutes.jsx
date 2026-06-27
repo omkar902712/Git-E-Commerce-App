@@ -3,7 +3,7 @@ import { AuthContext } from "./AuthContext";
 import { Navigate } from "react-router-dom";
 
 
-const ProtectedRoutes = ({ }) => {
+const ProtectedRoutes = ({children}) => {
 
   // Get user from AuthContext
   const { user } = useContext(AuthContext);

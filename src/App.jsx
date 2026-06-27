@@ -1,38 +1,94 @@
-import React from 'react'
-import Footer from './Components/Footer/Footer'
+import React from "react";
+import { Routes, Route } from "react-router-dom";
 
-import { Routes, Route } from 'react-router-dom'
+// Pages
+import Home from "./Pages/Home/Home";
+import ProductDetails from "./Pages/ProductDetails/ProductDetails";
+import CartPage from "./Pages/Cart/CartPage";
+import CartIsZero from "./Pages/Cart/CartIsZero";
+import BuyNow from "./Pages/BuyNow/BuyNow";
+import Register from "./Pages/Register/Register";
+import Login from "./Pages/Login/Login";
 
-import Home from './Pages/Home/Home';
-// import Header from './Components/Header/Header';
-// import CategoriesNavbar from './Components/CategoriesNavbar/CategoriesNavbar';
-import ProductDetails from './Pages/ProductDetails/ProductDetails';
-import CartPage from './Pages/Cart/CartPage';
-import CartIsZero from './Pages/Cart/CartIsZero';
-import BuyNow from './Pages/BuyNow/BuyNow';
-import Register from './Pages/Register/Register';
-import Login from './Pages/Login/Login';
+// Auth
+import ProtectedRoutes from "./auth/ProtectedRoutes";
+
 
 const App = () => {
   return (
-    <>
-      <Routes>
-        <Route path="*" element={<h1>404 Not Found</h1>} />
+    <Routes>
 
-        <Route path="/register" element={<Register />} />
+      {/* Public Routes - No login required */}
+      <Route 
+        path="/register" 
+        element={<Register />} 
+      />
 
-        <Route path="/" element={<Home />} />
+      <Route 
+        path="/login" 
+        element={<Login />} 
+      />
 
-        <Route path="/product/:id" element={<ProductDetails />} />
-        <Route path="/buynow/:id" element={<BuyNow />} />
 
-        <Route path="/cartPage" element={<CartPage />} />
-        <Route path="/cartIsZero" element={<CartIsZero />} />
+      {/* Private Routes - Login required */}
+      <Route
+        path="/"
+        element={
+          <ProtectedRoutes>
+            <Home />
+          </ProtectedRoutes>
+        }
+      />
 
-        <Route path="/login" element={<Login />} />
-      </Routes>
-    </>
-  )
-}
 
-export default App
+      <Route
+        path="/product/:id"
+        element={
+          <ProtectedRoutes>
+            <ProductDetails />
+          </ProtectedRoutes>
+        }
+      />
+
+
+      <Route
+        path="/buynow/:id"
+        element={
+          <ProtectedRoutes>
+            <BuyNow />
+          </ProtectedRoutes>
+        }
+      />
+
+
+      <Route
+        path="/cartPage"
+        element={
+          <ProtectedRoutes>
+            <CartPage />
+          </ProtectedRoutes>
+        }
+      />
+
+
+      <Route path="/cartIsZero"
+        element={
+          <ProtectedRoutes>
+            <CartIsZero />
+          </ProtectedRoutes>
+        }
+      />
+
+
+      {/* 404 Page */}
+      <Route
+        path="*"
+        element={<h1>404 Not Found</h1>}
+      />
+
+    </Routes>
+  );
+};
+
+
+export default App;

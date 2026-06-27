@@ -1,7 +1,10 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { z } from "zod";
 import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
+
+// auth - AuthContext
+import { AuthContext } from "../../auth/AuthContext";
 
 // Login validation schema
 const loginSchema = z
@@ -35,9 +38,11 @@ const loginSchema = z
     }
   );
 
-
 const Login = () => {
   const navigate = useNavigate();
+
+  // Get login function from AuthContext
+  const { login } = useContext(AuthContext);
 
   // Get input values using useRef
   const emailPhoneRef = useRef();
@@ -91,12 +96,22 @@ const Login = () => {
       loginData.password === registeredUser.password
     ) {
 
-      alert("Login Successful");
+      // user login object
+      const user = {
+        name: registeredUser.fullName,
+        email: registeredUser.email,
+        phone: registeredUser.phone
+      };
+
+      // save login user in AuthContext
+      login(user);
+
+      alert("Login Successfull");
       navigate("/");
     }
     else {
       alert("Invalid Email/Phone or Password");
-    } 
+    }
   };
 
   return (
@@ -106,7 +121,7 @@ const Login = () => {
       <form onSubmit={handleSubmit}>
         <h1 className="title"> Login </h1>
 
-        {/* Input Email Or Phone, And Error */}
+        {/* Input Email / Phone, And Error */}
         <div className="form-group">
           <input type="text"
             placeholder="Enter Email Or Phone"
