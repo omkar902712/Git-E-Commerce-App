@@ -1,50 +1,76 @@
 import { createContext, useState } from "react";
 
-// create storage box for the authentication data 
+
+// Create authentication storage box
 export const AuthContext = createContext();
+
+
 
 export const AuthProvider = ({ children }) => {
 
-  // checked if user already logged in
-  // Get user from localStorage when opp state  
+
+  // Check already logged in user
+  // Get user from localStorage when app loads
+
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem("user")) || null
   );
 
-  // login function 
+
+
+  // Login function
+
   const login = (userData) => {
 
-    // save user data in browser storage
-    localStorage.getItem(
+
+    // Store user in browser storage
+
+    localStorage.setItem(
       "user",
       JSON.stringify(userData)
     );
 
-    // update react state
+
+    // Update React state
+
     setUser(userData);
+
   };
 
-  // logout function
-  const logout = (userData) => {
 
-    // remove user from browser function
+
+  // Logout function
+
+  const logout = () => {
+
+
+    // Remove user from localStorage
+
     localStorage.removeItem("user");
 
-    // remove user from react state
+
+    // Clear React state
+
     setUser(null);
+
   };
 
+
+
   return (
-    <div>
-      <AuthContext.Provider
-        value={{
-          user,
-          login,
-          logout
-        }}>
-        {children}
-      </AuthContext.Provider>
-    </div>
-  )
+
+    <AuthContext.Provider
+      value={{
+        user,
+        login,
+        logout
+      }}
+    >
+
+      {children}
+
+    </AuthContext.Provider>
+
+  );
 
 };
