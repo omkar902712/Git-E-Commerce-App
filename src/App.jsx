@@ -12,7 +12,7 @@ import ProtectedRoutes from "./auth/ProtectedRoutes";
 const Home = lazy(() =>
   new Promise((resolve) => {
     console.log("⏳ Waiting 5 seconds before loading Home...");
-
+ 
     setTimeout(() => {
       console.log("✅ Home Loaded");
       resolve(import("./Pages/Home/Home"));
