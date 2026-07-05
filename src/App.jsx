@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 
 // Auth
 import ProtectedRoutes from "./auth/ProtectedRoutes";
+import Spinner from "./Components/Spinner/Spineer";
 
 // ===============================
 // Lazy Loading
@@ -47,7 +48,7 @@ const Login = lazy(() =>
 
 const App = () => {
   return (
-    <Suspense fallback={<h2>Loading...</h2>}>
+    <Suspense fallback={<Spinner />}>
       <Routes>
 
         {/* Public Routes */}
