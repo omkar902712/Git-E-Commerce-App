@@ -3,7 +3,8 @@
   height: 400px;
   position: relative;
   overflow: hidden;
-  margin:-78px 0px 0px 0px;
+  margin: 0; /* removed negative margin to avoid overlapping header/categories */
+  z-index: 1;
 }
 
 .carousel-image{

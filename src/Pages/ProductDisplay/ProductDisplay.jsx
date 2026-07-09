@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import "./ProductDisplay.css";
 import { Link } from "react-router-dom";
 
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 const ProductsDisplay = ({
   selectedCategory,
   products,
@@ -10,7 +13,6 @@ const ProductsDisplay = ({
   const [allProducts, setAllProducts] = useState([]);
 
   useEffect(() => {
-
     if (products) {
       setAllProducts(products);
       return;
@@ -37,7 +39,7 @@ const ProductsDisplay = ({
             className="col-12 col-sm-6 col-lg-4 d-flex">
             <div className="product-card w-100">
               <Link to={`/product/${item.id}`}
-                className="product-link"> 
+                className="product-link">
                 <span className="badge bg-secondary product-badge">
                   Item #{index + 1}
                 </span>

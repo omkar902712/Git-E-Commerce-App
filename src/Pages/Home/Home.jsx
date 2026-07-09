@@ -34,12 +34,12 @@ const Home = () => {
       {/* Header */}
       <div className="row">
 
-        <Header />
+        <Header />        
 
         <CategoriesNavbar
           selectedCategory={selectedCategory}
           onCategorySelect={setSelectedCategory}
-        />
+        />          
 
         <HomeCarousel />
 

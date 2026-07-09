@@ -11,7 +11,13 @@
 
   white-space: nowrap;
 
-  scrollbar-width: thin;
+  scrollbar-width: thin;  
+}
+
+/* Ensure navbar sits above carousel */
+.categories-navbar{
+  position: relative;
+  z-index: 5;
 }
 
 .category-btn{

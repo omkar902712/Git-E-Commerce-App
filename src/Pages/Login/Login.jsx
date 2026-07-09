@@ -1,7 +1,10 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { z } from "zod";
 import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
+
+import AOS from "aos"; 
+import "aos/dist/aos.css";
 
 // auth - AuthContext
 import { AuthContext } from "../../auth/AuthContext";
@@ -50,6 +53,16 @@ const Login = () => {
 
   // Store validation errors
   const [errors, setErrors] = useState({});
+
+  // Initialize AOS on component mount
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+    });
+    // refresh to detect elements
+    AOS.refresh();
+  }, []);
 
   // Form submit function
   const handleSubmit = (e) => {
@@ -118,7 +131,7 @@ const Login = () => {
     <div className="login-container">
       <div className="stars"></div>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} data-aos="fade-up" data-aos-delay="100">
         <h1 className="title"> Login </h1>
 
         {/* Input Email / Phone, And Error */}

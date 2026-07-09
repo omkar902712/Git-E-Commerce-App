@@ -9,7 +9,23 @@ const CategoriesNavbar = ({ selectedCategory, onCategorySelect }) => {
     fetch('https://dummyjson.com/products/categories')
       .then((res) => res.json())
       .then((data) => {
-        setCategories(data);
+        // Normalize API response which may be an array of strings or objects
+        const mapped = data.map((cat) => {
+          if (typeof cat === 'string') {
+            return {
+              slug: cat,
+              name: cat.charAt(0).toUpperCase() + cat.slice(1),
+            };
+          }
+
+          // cat is an object
+          return {
+            slug: cat.slug || String(cat),
+            name: cat.name || (cat.slug ? cat.slug.charAt(0).toUpperCase() + cat.slug.slice(1) : String(cat)),
+          };
+        });
+
+        setCategories(mapped);
       });
 
   }, []);
@@ -27,14 +43,14 @@ const CategoriesNavbar = ({ selectedCategory, onCategorySelect }) => {
       </button>
 
       {/* Categories */}
-      {categories.map((item) => (
+      {categories.map((category) => (
 
         <button
-          key={item.slug}
-          className={`category-btn ${selectedCategory === item.slug ? 'active' : ''}`}
-          onClick={() => onCategorySelect(item.slug)}
+          key={category.slug}
+          className={`category-btn ${selectedCategory === category.slug ? 'active' : ''}`}
+          onClick={() => onCategorySelect(category.slug)}
         >
-          {item.name}
+          {category.name}
         </button>
 
       ))}
